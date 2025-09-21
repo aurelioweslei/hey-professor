@@ -11,14 +11,14 @@ ISSUE_ID=$(echo "$BRANCH_NAME" | grep -o -E "$REGEX_ISSUE_ID")
 
 COMMIT_MESSAGE=$(cat "$1")
 
-if [ -z "$ISSUE_ID" ]; then
+if -z "$ISSUE_ID"; then
   echo -e "${BRed}Branch não está no padrão que deveria mestre... ${NC}"
   exit 1
 fi
 
 # Prevent adding a issue key in commits that already have a JIRA issue key
 # i.g. HEY-1: HEY-1: my feature
-if [[ $COMMIT_MESSAGE == $ISSUE_ID* ]]; then
+if $COMMIT_MESSAGE == $ISSUE_ID*; then
   exit 0
 fi
 
